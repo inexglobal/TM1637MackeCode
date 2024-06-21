@@ -18,7 +18,7 @@ namespace TM1637 {
     /**
      * TM1637 LED display
      */
-    export class TM1637LEDs {
+    export class TM1637LEDs { 
         buf: Buffer;
         clk: DigitalPin;
         dio: DigitalPin;
