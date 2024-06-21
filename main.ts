@@ -35,6 +35,7 @@ namespace TM1637 {
             basic.pause(100);
             this._ON = 8;
             this.buf = pins.createBuffer(this.count);
+            basic.pause(100);
             this.clear();
         }
 
