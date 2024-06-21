@@ -30,12 +30,12 @@ namespace TM1637 {
          */
         init(): void {
             pins.digitalWritePin(this.clk, 0);
-            basic.pause(100);
+            basic.pause(10);
             pins.digitalWritePin(this.dio, 0);
-            basic.pause(100);
+            basic.pause(10);
             this._ON = 8;
             this.buf = pins.createBuffer(this.count);
-            basic.pause(100);
+            basic.pause(10);
             this.clear();
         }
 
@@ -44,9 +44,9 @@ namespace TM1637 {
          */
         _start() {
             pins.digitalWritePin(this.dio, 0);
-            basic.pause(100);
+            basic.pause(10);
             pins.digitalWritePin(this.clk, 0);
-            basic.pause(100);
+            basic.pause(10);
         }
 
         /**
@@ -54,11 +54,11 @@ namespace TM1637 {
          */
         _stop() {
             pins.digitalWritePin(this.dio, 0);
-            basic.pause(100);
+            basic.pause(10);
             pins.digitalWritePin(this.clk, 1);
-            basic.pause(100);
+            basic.pause(10);
             pins.digitalWritePin(this.dio, 1);
-            basic.pause(100);
+            basic.pause(10);
         }
 
         /**
@@ -85,17 +85,17 @@ namespace TM1637 {
         _write_byte(b: number) {
             for (let i = 0; i < 8; i++) {
                 pins.digitalWritePin(this.dio, (b >> i) & 1);
-                basic.pause(100);
+                basic.pause(10);
                 pins.digitalWritePin(this.clk, 1);
-                basic.pause(100);
+                basic.pause(10);
                 pins.digitalWritePin(this.clk, 0);
-                basic.pause(100);
+                basic.pause(10);
                 
             }
             pins.digitalWritePin(this.clk, 1);
-            basic.pause(100);
+            basic.pause(10);
             pins.digitalWritePin(this.clk, 0);
-            basic.pause(100);
+            basic.pause(10);
         }
 
         /**
