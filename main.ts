@@ -12,6 +12,7 @@ namespace TM1637 {
     let TM1637_CMD1 = 0x40;
     let TM1637_CMD2 = 0xC0;
     let TM1637_CMD3 = 0x80;
+    let bitDelay = 50;
     let _SEGMENTS = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71];
 
     /**
@@ -30,12 +31,12 @@ namespace TM1637 {
          */
         init(): void {
             pins.digitalWritePin(this.clk, 0);
-            basic.pause(10);
+            basic.pause(bitDelay);
             pins.digitalWritePin(this.dio, 0);
-            basic.pause(10);
+            basic.pause(bitDelay);
             this._ON = 8;
             this.buf = pins.createBuffer(this.count);
-            basic.pause(10);
+            basic.pause(bitDelay);
             this.clear();
         }
 
@@ -44,9 +45,9 @@ namespace TM1637 {
          */
         _start() {
             pins.digitalWritePin(this.dio, 0);
-            basic.pause(10);
+            basic.pause(bitDelay);
             pins.digitalWritePin(this.clk, 0);
-            basic.pause(10);
+            basic.pause(bitDelay);
         }
 
         /**
@@ -54,11 +55,11 @@ namespace TM1637 {
          */
         _stop() {
             pins.digitalWritePin(this.dio, 0);
-            basic.pause(10);
+            basic.pause(bitDelay);
             pins.digitalWritePin(this.clk, 1);
-            basic.pause(10);
+            basic.pause(bitDelay);
             pins.digitalWritePin(this.dio, 1);
-            basic.pause(10);
+            basic.pause(bitDelay);
         }
 
         /**
@@ -85,17 +86,16 @@ namespace TM1637 {
         _write_byte(b: number) {
             for (let i = 0; i < 8; i++) {
                 pins.digitalWritePin(this.dio, (b >> i) & 1);
-                basic.pause(10);
                 pins.digitalWritePin(this.clk, 1);
-                basic.pause(10);
+                basic.pause(bitDelay);
                 pins.digitalWritePin(this.clk, 0);
-                basic.pause(10);
+                basic.pause(bitDelay);
                 
             }
             pins.digitalWritePin(this.clk, 1);
-            basic.pause(10);
+            basic.pause(bitDelay);
             pins.digitalWritePin(this.clk, 0);
-            basic.pause(10);
+            basic.pause(bitDelay);
         }
 
         /**
